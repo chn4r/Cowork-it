@@ -1,0 +1,85 @@
+{
+  "results": [
+    {
+      "test": "Explorer charge",
+      "ok": true,
+      "detail": "True"
+    },
+    {
+      "test": "Navigation map",
+      "ok": true,
+      "detail": "map"
+    },
+    {
+      "test": "Navigation publish",
+      "ok": true,
+      "detail": "publish"
+    },
+    {
+      "test": "Navigation people",
+      "ok": true,
+      "detail": "people"
+    },
+    {
+      "test": "Navigation messages",
+      "ok": true,
+      "detail": "messages"
+    },
+    {
+      "test": "Navigation explore",
+      "ok": true,
+      "detail": "explore"
+    },
+    {
+      "test": "Filtre Artisans",
+      "ok": true,
+      "detail": "12->7"
+    },
+    {
+      "test": "Favoris",
+      "ok": true,
+      "detail": "♡>♥"
+    },
+    {
+      "test": "Fiche lieu",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "test": "Publication",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "test": "Rencontre vers messages",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "test": "Envoi message",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "test": "Paramètres réseau",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "test": "Persistance locale",
+      "ok": true,
+      "detail": "localStorage OK"
+    },
+    {
+      "test": "Carte repli hors ligne",
+      "ok": true,
+      "detail": "fallback sans Leaflet OK"
+    },
+    {
+      "test": "Navigation mobile",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "browser_errors": []
+}

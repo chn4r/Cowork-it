@@ -1,0 +1,12 @@
+Cowork it v3.4.1 — correction dépôt
+
+Corrections appliquées :
+- arborescence .github/workflows, scripts, tests, supabase restaurée
+- styles.css et leaflet-loader.js présents
+- version package.json = 3.4.1
+- CI corrigée : npm install au lieu de npm ci (aucun package-lock requis)
+- icône PWA SVG ajoutée et manifest mis à jour
+- service worker v3.4.1 mis à jour pour ne plus dépendre des PNG absents
+- .gitignore présent
+
+Contrôles locaux : syntaxe JS + contrôle statique.

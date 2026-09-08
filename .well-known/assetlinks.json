@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.chn4r.coworkit",
+      "sha256_cert_fingerprints": [
+        "FE:56:30:68:EB:FF:30:E2:53:3A:98:5F:15:86:AB:A4:6F:08:10:D7:A0:91:01:BF:9E:D6:0B:D2:4D:B0:F0:59"
+      ]
+    }
+  }
+]

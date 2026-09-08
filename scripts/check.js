@@ -6,7 +6,12 @@ let failed=false;
 function fail(msg){failed=true;console.error('FAIL:',msg)}
 function ok(msg){console.log('OK:',msg)}
 function read(name){return fs.readFileSync(path.join(root,name),'utf8')}
-const required=['index.html','styles.css','app.js','network.js','leaflet-loader.js','manifest.webmanifest','sw.js','offline.html','icons/icon.svg','tests/smoke.spec.js','supabase/migrations/001_initial.sql'];
+const required=[
+  'index.html','styles.css','app.js','network.js','leaflet-loader.js',
+  'manifest.webmanifest','sw.js','offline.html','icons/icon.svg',
+  'tests/smoke.spec.js','supabase/config.toml','supabase/migrations/001_initial.sql',
+  'vercel.json','.github/workflows/ci.yml'
+];
 for(const f of required) fs.existsSync(path.join(root,f))?ok(f+' présent'):fail(f+' manquant');
 const html=read('index.html');
 const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);
@@ -25,6 +30,22 @@ for(const f of ['app.js','network.js','leaflet-loader.js','sw.js','scripts/dev-s
   if(!fs.existsSync(path.join(root,f))){fail(f+' manquant');continue}
   const r=spawnSync(process.execPath,['--check',path.join(root,f)],{encoding:'utf8'});r.status===0?ok('Syntaxe '+f):fail('Syntaxe '+f+': '+(r.stderr||r.stdout).trim());
 }
-try{const m=JSON.parse(read('manifest.webmanifest'));const icon=m.icons?.[0]?.src?.replace(/^\.\//,'');icon&&fs.existsSync(path.join(root,icon))?ok('Icône manifeste valide'):fail('Icône manifeste manquante')}catch(e){fail('Manifest invalide: '+e.message)}
+try{
+  const m=JSON.parse(read('manifest.webmanifest'));
+  const icon=m.icons?.[0]?.src?.replace(/^\.\//,'');
+  icon&&fs.existsSync(path.join(root,icon))?ok('Icône manifeste valide'):fail('Icône manifeste manquante');
+}catch(e){fail('Manifest invalide: '+e.message)}
+try{
+  const v=JSON.parse(read('vercel.json'));
+  Array.isArray(v.headers)?ok('Configuration Vercel valide'):fail('vercel.json sans headers');
+}catch(e){fail('vercel.json invalide: '+e.message)}
+const migration=read('supabase/migrations/001_initial.sql');
+for(const token of ['enable row level security','auth.uid()','owner_id']){
+  migration.toLowerCase().includes(token)?ok('Supabase: '+token):fail('Supabase incomplet: '+token+' absent');
+}
+const browserBundle=['index.html','app.js','network.js'].map(read).join('\n').toLowerCase();
+/browserBundle/.test('')
+if(browserBundle.includes('service_role')) fail('Secret Supabase service_role référencé côté navigateur');
+else ok('Aucun secret service_role côté navigateur');
 process.exitCode=failed?1:0;
-if(!failed)console.log('\nCowork it: contrôle statique approfondi réussi.');
+if(!failed)console.log('\nCowork it: contrôle statique + déploiement réussi.');

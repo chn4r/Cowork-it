@@ -1,0 +1,12 @@
+COWORK IT 3.3 — ONE CLICK PUBLISH TESTS
+
+PASS JS syntax — publish-server.js
+PASS JS syntax — publish-cli.js
+PASS JS syntax — check.js
+
+OK: IDs uniques
+OK: Navigation valide
+OK: manifest.webmanifest présent
+OK: sw.js présent
+
+Cowork it: contrôle statique réussi.

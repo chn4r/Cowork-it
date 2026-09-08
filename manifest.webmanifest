@@ -1,0 +1,39 @@
+{
+  "name": "Cowork it — trouvez, collaborez, créez ensemble",
+  "short_name": "Cowork it",
+  "description": "Lieux de travail, ateliers, rencontres et disponibilités autour de vous.",
+  "start_url": "./index.html#explore",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fff7e8",
+  "theme_color": "#2d185b",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Carte",
+      "url": "./index.html#map"
+    },
+    {
+      "name": "Publier",
+      "url": "./index.html#publish"
+    },
+    {
+      "name": "Rencontres",
+      "url": "./index.html#people"
+    }
+  ]
+}

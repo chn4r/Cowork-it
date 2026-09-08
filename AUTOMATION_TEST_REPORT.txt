@@ -1,0 +1,9 @@
+STATIC CHECK
+============
+OK: IDs uniques
+OK: Navigation valide
+OK: manifest.webmanifest présent
+OK: sw.js présent
+
+Cowork it: contrôle statique réussi.
+

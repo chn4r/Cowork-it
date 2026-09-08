@@ -39,12 +39,11 @@ try{
   const v=JSON.parse(read('vercel.json'));
   Array.isArray(v.headers)?ok('Configuration Vercel valide'):fail('vercel.json sans headers');
 }catch(e){fail('vercel.json invalide: '+e.message)}
-const migration=read('supabase/migrations/001_initial.sql');
+const migration=read('supabase/migrations/001_initial.sql').toLowerCase();
 for(const token of ['enable row level security','auth.uid()','owner_id']){
-  migration.toLowerCase().includes(token)?ok('Supabase: '+token):fail('Supabase incomplet: '+token+' absent');
+  migration.includes(token)?ok('Supabase: '+token):fail('Supabase incomplet: '+token+' absent');
 }
 const browserBundle=['index.html','app.js','network.js'].map(read).join('\n').toLowerCase();
-/browserBundle/.test('')
 if(browserBundle.includes('service_role')) fail('Secret Supabase service_role référencé côté navigateur');
 else ok('Aucun secret service_role côté navigateur');
 process.exitCode=failed?1:0;

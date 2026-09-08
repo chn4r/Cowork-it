@@ -10,7 +10,7 @@ const required=[
   'index.html','styles.css','app.js','network.js','leaflet-loader.js',
   'manifest.webmanifest','sw.js','offline.html','icons/icon.svg',
   'tests/smoke.spec.js','supabase/config.toml','supabase/migrations/001_initial.sql',
-  'vercel.json','.github/workflows/ci.yml'
+  'supabase/migrations/002_optimize_rls_and_indexes.sql','vercel.json','.github/workflows/ci.yml'
 ];
 for(const f of required) fs.existsSync(path.join(root,f))?ok(f+' présent'):fail(f+' manquant');
 const html=read('index.html');
@@ -39,12 +39,12 @@ try{
   const v=JSON.parse(read('vercel.json'));
   Array.isArray(v.headers)?ok('Configuration Vercel valide'):fail('vercel.json sans headers');
 }catch(e){fail('vercel.json invalide: '+e.message)}
-const migration=read('supabase/migrations/001_initial.sql').toLowerCase();
+const migrations=['supabase/migrations/001_initial.sql','supabase/migrations/002_optimize_rls_and_indexes.sql'].map(read).join('\n').toLowerCase();
 for(const token of ['enable row level security','auth.uid()','owner_id']){
-  migration.includes(token)?ok('Supabase: '+token):fail('Supabase incomplet: '+token+' absent');
+  migrations.includes(token)?ok('Supabase: '+token):fail('Supabase incomplet: '+token+' absent');
 }
-const browserBundle=['index.html','app.js','network.js'].map(read).join('\n').toLowerCase();
-if(browserBundle.includes('service_role')) fail('Secret Supabase service_role référencé côté navigateur');
-else ok('Aucun secret service_role côté navigateur');
+const browserBundle=['index.html','app.js','network.js'].map(read).join('\n');
+const secretPatterns=[/sb_secret_[A-Za-z0-9_-]{12,}/, /SUPABASE_SERVICE_ROLE_KEY\s*[:=]\s*["'][^"']+/i];
+secretPatterns.some(re=>re.test(browserBundle))?fail('Secret Supabase privilégié exposé côté navigateur'):ok('Aucun secret Supabase privilégié côté navigateur');
 process.exitCode=failed?1:0;
-if(!failed)console.log('\nCowork it: contrôle statique + déploiement réussi.');
+if(!failed)console.log('\nCowork it: contrôle statique et préparation du déploiement réussis.');

@@ -27,7 +27,7 @@ test('publication locale persistante', async ({ page }) => {
   await page.locator('#pubDesc').fill('Publication créée par le test Playwright.');
   await page.locator('#pubConfirm').check();
   await page.locator('#publishForm').getByRole('button',{name:/Publier/i}).click();
-  await page.locator('[data-nav="explore"]').first().click();
+  await expect(page.locator('#page-explore')).toHaveClass(/active/);
   await expect(page.locator('body')).toContainText('Lieu de test automatisé');
   await page.reload();
   await expect(page.locator('body')).toContainText('Lieu de test automatisé');
@@ -35,7 +35,11 @@ test('publication locale persistante', async ({ page }) => {
 
 test('messagerie locale', async ({ page }) => {
   await page.locator('[data-nav="people"]').first().click();
-  await page.locator('[data-action="contact-person"]').first().click();
+  await expect(page.locator('#page-people')).toHaveClass(/active/);
+  const proposal=page.locator('#peopleGrid [data-action="contact-person"]').first();
+  await expect(proposal).toBeVisible();
+  await proposal.click();
+  await expect(page.locator('#page-messages')).toHaveClass(/active/);
   await page.locator('#chatInput').fill('Message de test automatisé');
   await page.locator('#chatForm').getByRole('button',{name:/Envoyer/i}).click();
   await expect(page.locator('#chatBody')).toContainText('Message de test automatisé');

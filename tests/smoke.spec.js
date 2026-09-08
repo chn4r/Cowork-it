@@ -20,18 +20,21 @@ test('filtres, fiche lieu et favoris', async ({ page }) => {
 });
 
 test('publication locale persistante', async ({ page }) => {
-  await page.goto('/#publish');
+  await page.locator('[data-nav="publish"]').first().click();
+  await expect(page.locator('#page-publish')).toHaveClass(/active/);
   await page.locator('#pubTitle').fill('Lieu de test automatisé');
   await page.locator('#pubCity').fill('Rennes');
   await page.locator('#pubDesc').fill('Publication créée par le test Playwright.');
   await page.locator('#pubConfirm').check();
   await page.locator('#publishForm').getByRole('button',{name:/Publier/i}).click();
+  await page.locator('[data-nav="explore"]').first().click();
   await expect(page.locator('body')).toContainText('Lieu de test automatisé');
-  await page.reload();await expect(page.locator('body')).toContainText('Lieu de test automatisé');
+  await page.reload();
+  await expect(page.locator('body')).toContainText('Lieu de test automatisé');
 });
 
 test('messagerie locale', async ({ page }) => {
-  await page.goto('/#people');
+  await page.locator('[data-nav="people"]').first().click();
   await page.locator('[data-action="contact-person"]').first().click();
   await page.locator('#chatInput').fill('Message de test automatisé');
   await page.locator('#chatForm').getByRole('button',{name:/Envoyer/i}).click();

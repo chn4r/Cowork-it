@@ -83,7 +83,6 @@ window.addEventListener('load',()=>{
  const obs=new MutationObserver(()=>requestAnimationFrame(apply));
  ['placesGrid','mapList','map'].forEach(id=>{const n=document.getElementById(id);if(n)obs.observe(n,{childList:true,subtree:true})});
  setInterval(apply,1500);
- if(!document.querySelector('script[data-world-map-engine]')){const s=document.createElement('script');s.src='./world-map.js';s.defer=true;s.dataset.worldMapEngine='1';document.body.appendChild(s)}
 });
 window.CoworkMapUI={apply,get active(){return active}};
 })();

@@ -14,8 +14,6 @@ test('filtres, fiche lieu et favoris', async ({ page }) => {
   await page.getByRole('button',{name:/Disponible maintenant/i}).click();
   let visiblePlaces=page.locator('#placesGrid [data-place-card]:visible');
   if(await visiblePlaces.count()===0){
-    // Le catalogue réel peut légitimement n'avoir aucun lieu confirmé disponible maintenant.
-    // On réinitialise alors le filtre pour tester la fiche et les favoris sans inventer de disponibilité.
     const reset=page.locator('#placesGrid [data-action="clear-filters"]');
     if(await reset.count()) await reset.click();
     else await page.getByRole('button',{name:/Disponible maintenant/i}).click();
@@ -26,6 +24,25 @@ test('filtres, fiche lieu et favoris', async ({ page }) => {
   await firstPlace.locator('[data-action="open-place"]').click();
   await expect(page.locator('#modalBackdrop')).toHaveClass(/show/);
   await page.locator('[data-action="close-modal"]').click();
+});
+
+test('carte mobile : vues Carte et Liste séparées de la navigation', async ({ page }) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.reload();
+  await page.locator('[data-nav="map"]').first().click();
+  const modeBar=page.locator('.cowork-map-modebar');
+  await expect(modeBar).toBeVisible();
+  await expect(page.locator('#map')).toBeVisible();
+  const bottom=page.locator('.bottom-nav');
+  await expect(bottom).toBeVisible();
+  const modeBox=await modeBar.boundingBox(),bottomBox=await bottom.boundingBox();
+  expect(modeBox && bottomBox && modeBox.y+modeBox.height < bottomBox.y).toBeTruthy();
+  await modeBar.locator('[data-cowork-map-view="list"]').click();
+  await expect(page.locator('#page-map')).toHaveClass(/cowork-list-mode/);
+  await expect(page.locator('#mapList')).toBeVisible();
+  await expect(page.locator('.map-wrap')).toBeHidden();
+  await modeBar.locator('[data-cowork-map-view="map"]').click();
+  await expect(page.locator('.map-wrap')).toBeVisible();
 });
 
 test('publication locale persistante', async ({ page }) => {

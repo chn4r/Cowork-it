@@ -1,0 +1,46 @@
+name: Refresh workplace catalog
+
+on:
+  push:
+    paths:
+      - 'scripts/refresh-workplaces.mjs'
+      - '.github/workflows/refresh-workplaces.yml'
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-workplaces
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Refresh catalog
+        run: node scripts/refresh-workplaces.mjs
+      - name: Validate generated files
+        run: |
+          node -e "const d=require('./data/workplaces-auto.json'); if(!d.places || d.places.length<10) process.exit(1); console.log(d.count+' lieux');"
+          node --check tiers-coworking.js
+      - name: Commit refreshed catalog
+        run: |
+          if git diff --quiet -- index.html tiers-coworking.js data/workplaces-auto.json; then
+            echo 'No catalog change'
+            exit 0
+          fi
+          git config user.name 'Cowork it Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html tiers-coworking.js data/workplaces-auto.json
+          git commit -m 'data: refresh public, coworking and third-place catalog'
+          git push

@@ -18,4 +18,4 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-cowork-typ
 window.addEventListener('load',()=>{injectStyle();apply();const obs=new MutationObserver(()=>requestAnimationFrame(apply));['placesGrid','mapList','map'].forEach(id=>{const n=document.getElementById(id);if(n)obs.observe(n,{childList:true,subtree:true})});setInterval(apply,1500)});
 window.CoworkMapUI={apply,get active(){return active}};
 })();
-(()=>{if(document.querySelector('script[data-cowork-v4]'))return;const s=document.createElement('script');s.src='./v4-ui.js';s.dataset.coworkV4='1';document.body.appendChild(s)})();
+(()=>{if(!document.getElementById('nearCount'))document.body.insertAdjacentHTML('beforeend','<span id="nearCount" hidden></span>');if(!document.getElementById('liveCount'))document.body.insertAdjacentHTML('beforeend','<span id="liveCount" hidden></span>');if(document.querySelector('script[data-cowork-v4]'))return;const s=document.createElement('script');s.src='./v4-ui.js';s.dataset.coworkV4='1';s.onload=()=>setTimeout(()=>window.CoworkIt?.navigate?.('home'),0);document.body.appendChild(s)})();

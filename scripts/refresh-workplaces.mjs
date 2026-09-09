@@ -25,7 +25,7 @@ const query=`[out:json][timeout:60];(
  nwr[amenity=cafe](around:50000,${ORIGIN.lat},${ORIGIN.lng});
  nwr[amenity=arts_centre](around:50000,${ORIGIN.lat},${ORIGIN.lng});
  nwr[amenity=makerspace](around:50000,${ORIGIN.lat},${ORIGIN.lng});
- nwr[craft=*=yes](around:50000,${ORIGIN.lat},${ORIGIN.lng});
+ nwr[craft](around:50000,${ORIGIN.lat},${ORIGIN.lng});
 );out center tags;`;
 let osm=[];
 try{

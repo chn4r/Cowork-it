@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T06:42:46.319Z",
+  "generatedAt": "2026-09-09T08:09:25.493Z",
   "origin": {
     "lat": 47.9057,
     "lng": -1.7889
@@ -41,7 +41,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "cw-bcoworker-bruz",
@@ -74,7 +75,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "cw-alizes-cesson",
@@ -107,7 +109,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "cw-avenir-gho",
@@ -141,7 +144,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-lavoir-rennes",
@@ -175,7 +179,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-edulab",
@@ -189,7 +194,7 @@
       "wifi": true,
       "quiet": false,
       "capacity": 20,
-      "placeType": "third_place",
+      "placeType": "workshop",
       "website": "https://www.univ-rennes2.fr/campus/tiers-lieux",
       "amenities": [
         "Tiers-lieu",
@@ -209,7 +214,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-ess-cargo",
@@ -243,7 +249,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-beau-lieu",
@@ -277,7 +284,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-pnrb",
@@ -311,7 +319,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     },
     {
       "id": "tl-hotel-pasteur",
@@ -345,7 +354,8 @@
       "slots": [
         "Horaires à vérifier"
       ],
-      "verifiedAt": "2026-09-09"
+      "verifiedAt": "2026-09-09",
+      "catalogSource": "curated"
     }
   ]
 }

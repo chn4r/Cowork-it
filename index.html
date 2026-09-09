@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#26154d" name="theme-color"/>
-<title>Cowork it 3.6 — Carte & réseau</title>
+<title>Cowork it 3.7 — Carte mondiale</title>
 <link href="https://unpkg.com" rel="preconnect"/>
 <link href="./manifest.webmanifest" rel="manifest"/><link href="./icons/icon-192.png" rel="icon"/><link href="./icons/icon-192.png" rel="apple-touch-icon"/><link href="./styles.css" rel="stylesheet"/></head>
 <body>
@@ -46,7 +46,7 @@
 </div>
 </div>
 <div class="hero-side">
-<div class="stat-card"><div class="eyebrow" style="color:var(--purple2)">Autour de vous</div><div class="stat-row"><span class="stat-big" id="nearCount">0</span><span class="muted">lieux</span></div><p class="muted">dans un rayon de 20 km</p></div>
+<div class="stat-card"><div class="eyebrow" style="color:var(--purple2)">Autour de vous</div><div class="stat-row"><span class="stat-big" id="nearCount">0</span><span class="muted">lieux</span></div><p class="muted">catalogue local + carte mondiale</p></div>
 <div class="stat-card"><div class="eyebrow" style="color:var(--purple2)">Disponibles</div><div class="stat-row"><span class="stat-big" id="liveCount">0</span><span class="muted">maintenant</span></div><p class="muted">fraîcheur affichée sur chaque fiche</p></div>
 </div>
 </div>
@@ -63,11 +63,11 @@
 <div class="people-grid" id="peoplePreview"></div>
 </section>
 <section class="page" data-page="map" id="page-map">
-<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">Carte par catégories</div><h1>Autour de vous</h1></div><button class="secondary" data-action="locate-me">⌖ Me localiser</button></div>
+<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">Carte mondiale par catégories</div><h1>Travailler n’importe où</h1></div><button class="secondary" data-action="locate-me">⌖ Me localiser</button></div>
 <div class="map-shell">
 <div class="map-wrap">
 <div id="map"></div>
-<div class="map-fallback" id="mapFallback"><div><h2>Carte hors ligne</h2><p>La liste reste entièrement utilisable. La carte OpenStreetMap se réactive automatiquement dès que Leaflet est disponible.</p><button class="primary" data-action="retry-map">Réessayer</button></div></div>
+<div class="map-fallback" id="mapFallback"><div><h2>Carte hors ligne</h2><p>La liste locale reste utilisable. La carte OpenStreetMap se réactive automatiquement dès que Leaflet est disponible.</p><button class="primary" data-action="retry-map">Réessayer</button></div></div>
 <div class="map-tools">
 <button class="chip active" data-map-filter="all">Tous</button>
 <button class="chip" data-map-filter="public">Publics</button>
@@ -140,4 +140,4 @@
 </div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <div class="install-banner" id="installBanner"><div><b>Installer Cowork it</b><div style="font-size:12px;color:#d7cce5">Accès rapide et fonctionnement hors ligne.</div></div><button class="primary" id="installAppBtn">Installer</button><button class="ghost" id="dismissInstallBtn" style="color:white">Plus tard</button></div>
-<script src="./tiers-coworking.js"></script><script src="./network.js"></script><script src="./leaflet-loader.js"></script><script src="./app.js"></script><script src="./map-ui.js"></script></body></html>
+<script src="./tiers-coworking.js"></script><script src="./network.js"></script><script src="./leaflet-loader.js"></script><script src="./world-map.js"></script><script src="./app.js"></script><script src="./map-ui.js"></script></body></html>

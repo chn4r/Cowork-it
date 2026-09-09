@@ -12,7 +12,16 @@ test('navigation principale', async ({ page }) => {
 
 test('filtres, fiche lieu et favoris', async ({ page }) => {
   await page.getByRole('button',{name:/Disponible maintenant/i}).click();
-  const firstPlace=page.locator('[data-place-card]').first();await expect(firstPlace).toBeVisible();
+  let visiblePlaces=page.locator('#placesGrid [data-place-card]:visible');
+  if(await visiblePlaces.count()===0){
+    // Le catalogue réel peut légitimement n'avoir aucun lieu confirmé disponible maintenant.
+    // On réinitialise alors le filtre pour tester la fiche et les favoris sans inventer de disponibilité.
+    const reset=page.locator('#placesGrid [data-action="clear-filters"]');
+    if(await reset.count()) await reset.click();
+    else await page.getByRole('button',{name:/Disponible maintenant/i}).click();
+    visiblePlaces=page.locator('#placesGrid [data-place-card]:visible');
+  }
+  const firstPlace=visiblePlaces.first();await expect(firstPlace).toBeVisible();
   await firstPlace.locator('[data-action="favorite"]').click();
   await firstPlace.locator('[data-action="open-place"]').click();
   await expect(page.locator('#modalBackdrop')).toHaveClass(/show/);

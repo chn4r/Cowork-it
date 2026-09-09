@@ -1,0 +1,52 @@
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'com.android.application'
+}
+
+def pkg = new JsonSlurper().parse(file('../../package.json'))
+def versionParts = (pkg.version ?: '1.0.0').tokenize('.').collect { (it.isInteger() ? it.toInteger() : 0) }
+while (versionParts.size() < 3) versionParts << 0
+def calculatedVersionCode = versionParts[0] * 1000000 + versionParts[1] * 1000 + versionParts[2]
+
+def keystorePath = System.getenv('ANDROID_KEYSTORE_PATH')
+def keystorePassword = System.getenv('ANDROID_KEYSTORE_PASSWORD')
+def keyAliasValue = System.getenv('ANDROID_KEY_ALIAS')
+def keyPasswordValue = System.getenv('ANDROID_KEY_PASSWORD')
+def canSign = keystorePath && keystorePassword && keyAliasValue && keyPasswordValue
+
+android {
+    namespace 'com.chn4r.coworkit'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.chn4r.coworkit'
+        minSdk 23
+        targetSdk 36
+        versionCode calculatedVersionCode
+        versionName pkg.version
+    }
+
+    signingConfigs {
+        if (canSign) {
+            release {
+                storeFile file(keystorePath)
+                storePassword keystorePassword
+                keyAlias keyAliasValue
+                keyPassword keyPasswordValue
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (canSign) signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.3'
+}

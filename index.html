@@ -5,10 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#26154d" name="theme-color"/>
-<title>Cowork it 3.0 — Réseau</title>
+<title>Cowork it 3.6 — Carte & réseau</title>
 <link href="https://unpkg.com" rel="preconnect"/>
-
-
 <link href="./manifest.webmanifest" rel="manifest"/><link href="./icons/icon-192.png" rel="icon"/><link href="./icons/icon-192.png" rel="apple-touch-icon"/><link href="./styles.css" rel="stylesheet"/></head>
 <body>
 <div class="app">
@@ -39,7 +37,7 @@
 <div class="hero-main">
 <div class="eyebrow">Trouvez · collaborez · créez ensemble</div>
 <h1>Où voulez-vous travailler aujourd’hui ?</h1>
-<p>Des lieux publics ou privés, des ateliers et des personnes disponibles autour de vous — avec une disponibilité datée, des règles claires et un contact direct.</p>
+<p>Médiathèques, coworkings, tiers-lieux, ateliers, cafés et lieux privés autour de vous — avec disponibilité, règles, services et emplacement cartographique.</p>
 <div class="hero-actions">
 <button class="primary" data-action="set-quick-filter" data-filter="now">Disponible maintenant</button>
 <button class="secondary" data-action="set-quick-filter" data-filter="free">Gratuit</button>
@@ -52,7 +50,7 @@
 <div class="stat-card"><div class="eyebrow" style="color:var(--purple2)">Disponibles</div><div class="stat-row"><span class="stat-big" id="liveCount">0</span><span class="muted">maintenant</span></div><p class="muted">fraîcheur affichée sur chaque fiche</p></div>
 </div>
 </div>
-<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">4 univers, un seul réseau</div><h2>Explorer</h2></div><button class="ghost" data-nav="map">Voir sur la carte →</button></div>
+<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">Tous les lieux de travail nomade</div><h2>Explorer</h2></div><button class="ghost" data-nav="map">Voir sur la carte →</button></div>
 <div class="chips" id="universeChips">
 <button class="chip active" data-universe="all">Tout</button>
 <button class="chip" data-universe="computer">💻 Ordinateurs</button>
@@ -65,7 +63,7 @@
 <div class="people-grid" id="peoplePreview"></div>
 </section>
 <section class="page" data-page="map" id="page-map">
-<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">Carte ↔ liste synchronisées</div><h1>Autour de vous</h1></div><button class="secondary" data-action="locate-me">⌖ Me localiser</button></div>
+<div class="section-head"><div><div class="eyebrow" style="color:var(--purple2)">Carte par catégories</div><h1>Autour de vous</h1></div><button class="secondary" data-action="locate-me">⌖ Me localiser</button></div>
 <div class="map-shell">
 <div class="map-wrap">
 <div id="map"></div>
@@ -141,6 +139,5 @@
 <div class="modal" id="modal"></div>
 </div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
-
-
-<div class="install-banner" id="installBanner"><div><b>Installer Cowork it</b><div style="font-size:12px;color:#d7cce5">Accès rapide et fonctionnement hors ligne.</div></div><button class="primary" id="installAppBtn">Installer</button><button class="ghost" id="dismissInstallBtn" style="color:white">Plus tard</button></div><script src="./tiers-coworking.js"></script><script src="./network.js"></script><script src="./leaflet-loader.js"></script><script src="./app.js"></script></body></html>
+<div class="install-banner" id="installBanner"><div><b>Installer Cowork it</b><div style="font-size:12px;color:#d7cce5">Accès rapide et fonctionnement hors ligne.</div></div><button class="primary" id="installAppBtn">Installer</button><button class="ghost" id="dismissInstallBtn" style="color:white">Plus tard</button></div>
+<script src="./tiers-coworking.js"></script><script src="./network.js"></script><script src="./leaflet-loader.js"></script><script src="./app.js"></script><script src="./map-ui.js"></script></body></html>

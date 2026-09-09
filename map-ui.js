@@ -76,13 +76,14 @@ function decorateMarkers(){
  if(wrap&&!wrap.querySelector('.cowork-map-legend')){const l=document.createElement('div');l.className='cowork-map-legend';l.innerHTML=['library','coworking','third_place','workshop','cafe','private'].map(k=>`<span>${TYPES[k].icon} ${TYPES[k].label}</span>`).join('');wrap.appendChild(l)}
 }
 function syncButtons(){document.querySelectorAll('[data-cowork-type]').forEach(b=>b.classList.toggle('active',b.dataset.coworkType===active))}
-function apply(){ensureFilters();syncButtons();decorateCards();decorateMarkers();document.title='Cowork it 3.6 — Carte & réseau';}
+function apply(){ensureFilters();syncButtons();decorateCards();decorateMarkers();document.title='Cowork it 3.7 — Carte mondiale';}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cowork-type]');if(!b)return;active=b.dataset.coworkType;syncButtons();requestAnimationFrame(apply)});
 window.addEventListener('load',()=>{
  injectStyle();apply();
  const obs=new MutationObserver(()=>requestAnimationFrame(apply));
  ['placesGrid','mapList','map'].forEach(id=>{const n=document.getElementById(id);if(n)obs.observe(n,{childList:true,subtree:true})});
  setInterval(apply,1500);
+ if(!document.querySelector('script[data-world-map-engine]')){const s=document.createElement('script');s.src='./world-map.js';s.defer=true;s.dataset.worldMapEngine='1';document.body.appendChild(s)}
 });
 window.CoworkMapUI={apply,get active(){return active}};
 })();
